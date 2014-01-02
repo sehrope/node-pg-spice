@@ -274,8 +274,8 @@
       var sql;
       if( _.isString(config) ) {
         sql = config;
-      } else if( _.isObject(config) && _.has(config, 'name') ) {
-        sql = config.name;        
+      } else if( _.isObject(config) && _.has(config, 'text') ) {
+        sql = config.text;        
       }
       if( sql ) {
         debug.sql(sql);
