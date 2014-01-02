@@ -27,7 +27,13 @@ The SQL parsing for named parameters is done in a single pass and includes ignor
 
 ### Why Use Named Parameters?
 
-SQL with named parameters is more readable and positional parameters (i.e. `$1`, `$2`, ...). Also, with named parameters it's possible to pass your existing model objects as the parameter itself.
+SQL with named parameters is more readable than SQL with positional parameters (i.e. `$1`, `$2`, ...).
+
+Also, with named parameters it's possible to pass your existing model objects as the parameter itself rather than breaking down the individual fields into an array.
+
+### Why isn't this part of the node-postgres client?
+
+The node-postgres client matches up with the PostgreSQL server protocol itself which only supports numbered params. Named parameters are traditionally provided at the client layer.
 
 ### Examples
 
@@ -94,7 +100,7 @@ PostgreSQL allows you to specify the same parameter multiple times in the same S
 
     SELECT $1, foo FROM bar WHERE bam = $1
 
-pg-spice allows you to do the same name parameters. The previous example could be rewritten as :
+pg-spice allows you to do the same with name parameters. The previous example could be rewritten as (note that `:bam` is repeated):
 
     SELECT :bam, foo FROM bar WHERE bam = :bam
 
@@ -113,11 +119,13 @@ pg-spice supports the following types of named parameters:
 
         SELECT * FROM my_table WHERE foo = $foo
 
-By default pg-spice will throw an error if you mix multiple types of parameters in single SQL statement. It will also throw an error if you mix named and numbered parameters in the same SQL statement.
+By default pg-spice will throw an error if you mix multiple types of parameters in single SQL statement. For example by default you can't (and shouldn't!) do: `SELECT :foo, :{bar}`
+
+It will also throw an error if you mix named and numbered parameters in the same SQL statement as it would not make any sense. For example can't (and shouldn't!) do: `SELECT :foo, $2`
 
 ### Caching
 
-By default the translated SQL is cached so repeated calls with the same named parameter SQL will not require reparsing the SQL. This can be overridden.
+By default the translated SQL is cached so repeated calls with the same named parameter SQL will not require reparsing the SQL. This can be overridden via the `enableParseCache` option.
 
 ## Debug SQL Logging
 
@@ -129,7 +137,7 @@ The SQL for all calls to `pg.Client.query(...)` is optionally logged to debug su
 
 # Options
 
-You can override the default options by passing in a second parameter to patch:
+You can override the default options by passing in a second parameter to the patch function:
 
     var pg = require('pg');
     require('pg-spice').patch(pg, {enableParseCache: false});
