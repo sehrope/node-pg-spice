@@ -1,0 +1,36 @@
+{
+  "name": "pg-spice",
+  "version": "0.0.0",
+  "description": "Monkey patch providing sugar and spice atop the node.js PostgreSQL client library",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sehrope/node-pg-spice"
+  },
+  "keywords": [
+    "postgresql",
+    "postgres",
+    "pg",
+    "sugar",
+    "spice",
+    "named",
+    "parameters"
+  ],
+  "author": "Sehrope Sarkuni <sehrope@jackdb.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "debug": "~0.7.4"
+  },
+  "devDependencies": {
+    "jshint": "1.1.0",
+    "pg": "~2.10.0",
+    "mocha": "~1.16.2"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  }
+}
