@@ -1,6 +1,6 @@
 # node-pg-spice
 
-Monkey patch to add sugar and spice to [node-pg](https://github.com/brianc/node-postgres) (the [node.js](http://nodejs.org/) [PostgreSQL](http://www.postgresql.org/) client).
+Monkey patch to add sugar and spice to [node-postgres](https://github.com/brianc/node-postgres) (the [node.js](http://nodejs.org/) [PostgreSQL](http://www.postgresql.org/) client).
 
 # Installation
 
