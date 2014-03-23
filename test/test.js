@@ -1,5 +1,5 @@
 var _ = require('lodash'),
-    pg = require('pg'),  
+    pg = require('pg'),
     assert = require('assert'),
     spice = require('../index.js');
 spice.patch(pg);
