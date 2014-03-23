@@ -22,7 +22,9 @@
   "author": "Sehrope Sarkuni <sehrope@jackdb.com>",
   "license": "MIT",
   "dependencies": {
-    "lodash": "~2.4.1",
+    "lodash": "~2.4.1"
+  },
+  "optionalDependencies": {
     "debug": "~0.7.4"
   },
   "devDependencies": {

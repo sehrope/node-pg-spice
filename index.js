@@ -2,11 +2,19 @@
   "use strict";
 
   var _ = require('lodash');
+  var debugModule;
+  try {
+    debugModule = require('debug');
+  } catch( e ) {
+    // debug module not found, ignore and use a no-op
+    debugModule = function(name) { return function() {}; };
+  }
   var debug = {
-      main: require('debug')('pg-spice'),
-      parsed: require('debug')('pg-spice:parsed'),
-      params: require('debug')('pg-spice:params'),
-      sql: require('debug')('pg-spice:sql')};
+      main: debugModule('pg-spice'),
+      parsed: debugModule('pg-spice:parsed'),
+      params: debugModule('pg-spice:params'),
+      sql: debugModule('pg-spice:sql')
+  };
 
   var defaults = {
     enableParseCache: true,
