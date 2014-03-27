@@ -297,7 +297,7 @@
         sql = config.text;        
       }
       if( sql ) {
-        debug.sql(filterDebugSql(sql));
+        debug.sql(filterDebugSQL(sql));
       }
       if( arguments.length === 3 && !_.isArray(values) && _.isObject(values) ) {
         try {
@@ -305,7 +305,7 @@
             throw new Error("First parameter of query() must be a string or config object with a name property");
           }
           var parsedSql = parseSql(sql);
-          debug.main("parsed sql:", filterDebugSql(parsedSql));
+          debug.main("parsed sql:", filterDebugSQL(parsedSql));
           var params = convertParamValues(parsedSql, values);
           debug.main("parsed params:", params);
           return origQuery.apply(this, [parsedSql.sql, params, callback]);
