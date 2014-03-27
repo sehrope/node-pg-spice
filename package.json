@@ -24,13 +24,17 @@
   "dependencies": {
     "lodash": "~2.4.1"
   },
+  "peerDependencies": {
+    "pg": "~2",
+    "debug": "~0"
+  },
   "optionalDependencies": {
-    "debug": "~0.7.4"
   },
   "devDependencies": {
-    "jshint": "1.1.0",
-    "pg": "~2.10.0",
-    "mocha": "~1.16.2"
+    "jshint": "latest",
+    "mocha": "latest",
+    "pg": "~2",
+    "debug": "~0"
   },
   "engines": {
     "node": ">= 0.8.0"

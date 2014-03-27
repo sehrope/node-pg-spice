@@ -100,7 +100,7 @@ PostgreSQL allows you to specify the same parameter multiple times in the same S
 
     SELECT $1, foo FROM bar WHERE bam = $1
 
-pg-spice allows you to do the same with name parameters. The previous example could be rewritten as (note that `:bam` is repeated):
+pg-spice allows you to do the same with named parameters. The previous example could be rewritten as (note that `:bam` is repeated):
 
     SELECT :bam, foo FROM bar WHERE bam = :bam
 
@@ -144,8 +144,19 @@ You can override the default options by passing in a second parameter to the pat
 
 ## Available options
 
-* `enableParseCache` - Whether to cache parsed SQL between calls. Defaults to __true__.
-* `allowMultipleParamTypes` - Whether to allow multiple types of parameters in the same SQL statement. Defaults to __false__.
+* `enableParseCache` - Whether to cache parsed SQL between calls.
+
+    Defaults to __true__. 
+* `allowMultipleParamTypes` - Whether to allow multiple types of parameters in the same SQL statement.
+
+     Defaults to __false__.
+* `trimDebugSql` - Whether to trim whitespace from executed SQL before logging it. This will only effect logging, not the actual SQL that is executed. Newlines and other whitespace will be reduced to a single space.
+
+    If you use multi-line SQL (*ex: via "here docs" in CoffeeScript*) then this will make it easier to read the debug SQL lines as they will appear on a single line.
+
+    Alternatively you can also set it by setting the environment variable `PG_SPICE_TRIM_DEBUG_SQL` to `true`. All other values are considered false.
+
+    Defaults to __false__.
 
 # Support
 

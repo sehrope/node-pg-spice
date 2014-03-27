@@ -18,7 +18,8 @@
 
   var defaults = {
     enableParseCache: true,
-    allowMultipleParamTypes: false
+    allowMultipleParamTypes: false,
+    trimDebugSql: process.env.PG_SPICE_TRIM_DEBUG_SQL === 'true'
   };
   var globals = {
     isPatched: false,
@@ -269,12 +270,22 @@
     return ret;
   }
 
+  function filterDebugSQL(sql) {
+    if( globals.options.trimDebugSql ) {
+      sql = sql || "";
+      return sql.replaceAll(/\W+/g, " ");
+    }
+    return sql;
+  }
+
   function patch(pg, options) {
     if( globals.isPatched ) {
+      debug.main('Already patched, skipping');
       return;
     }
     globals.isPatched = true;
     globals.options = _.defaults(options || {}, defaults);
+    debug.main('Patching pg module with options:', globals.options);
 
     // Add named parameter support to Client.query:
     var origQuery = pg.Client.prototype.query;
@@ -286,7 +297,7 @@
         sql = config.text;        
       }
       if( sql ) {
-        debug.sql(sql);
+        debug.sql(filterDebugSql(sql));
       }
       if( arguments.length === 3 && !_.isArray(values) && _.isObject(values) ) {
         try {
@@ -294,7 +305,7 @@
             throw new Error("First parameter of query() must be a string or config object with a name property");
           }
           var parsedSql = parseSql(sql);
-          debug.main("parsed sql:", parsedSql);
+          debug.main("parsed sql:", filterDebugSql(parsedSql));
           var params = convertParamValues(parsedSql, values);
           debug.main("parsed params:", params);
           return origQuery.apply(this, [parsedSql.sql, params, callback]);
