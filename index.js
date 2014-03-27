@@ -272,7 +272,6 @@
 
   function filterDebugSQL(sql) {
     if( globals.options.trimDebugSql ) {
-      sql = sql || "";
       return sql.replace(/\W+/g, " ");
     }
     return sql;
@@ -305,7 +304,7 @@
             throw new Error("First parameter of query() must be a string or config object with a name property");
           }
           var parsedSql = parseSql(sql);
-          debug.main("parsed sql:", filterDebugSQL(parsedSql));
+          debug.main("parsed sql:", parsedSql);
           var params = convertParamValues(parsedSql, values);
           debug.main("parsed params:", params);
           return origQuery.apply(this, [parsedSql.sql, params, callback]);
