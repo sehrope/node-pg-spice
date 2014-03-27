@@ -272,7 +272,7 @@
 
   function filterDebugSQL(sql) {
     if( globals.options.trimDebugSql ) {
-      return sql.replace(/\W+/g, " ");
+      return sql.replace(/\s+/g, " ");
     }
     return sql;
   }
