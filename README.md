@@ -131,9 +131,21 @@ By default the translated SQL is cached so repeated calls with the same named pa
 
 pg-spice uses the [debug](https://github.com/visionmedia/debug) package for logging. By default all logging is disabled.
 
-The SQL for all calls to `pg.Client.query(...)` is optionally logged to debug sub logger named `pg-spice:sql`. To display the SQL execute your node.js program like this:
+The SQL for all calls to `pg.Client.query(...)` is optionally logged to a debug sub logger named `pg-spice:sql`. This works for both named parameters and numbered parameters.
+
+To display the SQL execute your node.js program like this:
 
     DEBUG=pg-spice:sql node foo.js
+
+Then a file such as foo.js:
+
+    client.query("SELECT * FROM my_table WHERE some_thing = 'foobar'", [], function(err, result) {
+      /* do something */
+    });
+
+Would output:
+
+    pg-spice:sql SELECT * FROM my_table WHERE some_thing = 'foobar' +0ms
 
 # Options
 
