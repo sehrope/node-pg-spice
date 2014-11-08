@@ -121,7 +121,7 @@ pg-spice supports the following types of named parameters:
 
 By default pg-spice will throw an error if you mix multiple types of parameters in single SQL statement. For example by default you can't (and shouldn't!) do: `SELECT :foo, :{bar}`
 
-It will also throw an error if you mix named and numbered parameters in the same SQL statement as it would not make any sense. For example can't (and shouldn't!) do: `SELECT :foo, $2`
+It will also throw an error if you mix named and numbered parameters in the same SQL statement as it would not make any sense. For example you can't (and shouldn't!) do: `SELECT :foo, $2`
 
 ### Caching
 
