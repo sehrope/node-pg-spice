@@ -187,10 +187,9 @@ Ideally I'd like pg-spice to not interfere at all with regular usage of node-pos
 * [debug](https://github.com/visionmedia/debug)
 
 # Production Use
+* [JackDB](https://www.jackdb.com/)
 
-Coming soon!
-
-*If you use node-pg-spice in production and would like your site listed here, fork & add it.*
+*If you use pg-spice in production and would like your site listed here, fork & add it.*
 
 # License
 
