@@ -23,7 +23,7 @@ As pg-spice modifies the `pg.Client` prototype this need only be done once at th
 
 pg-spice extends `pg.Client.query(config, values, cb)` to allow for using named parameters. To use it simply pass an object as the second paramater (the `values` field). Any other calls will be proxied to the original function.
 
-The SQL parsing for named parameters is done in a single pass and includes ignoring of otherwise valid named parameters in comments (both multi-line `/* ... */ and single-line `-- ...` styles), strings (single quotes), and quoted identifiers (double quotes).
+The SQL parsing for named parameters is done in a single pass and includes ignoring of otherwise valid named parameters in comments (both multi-line `/* ... */` and single-line `-- ...` styles), strings (single quotes), and quoted identifiers (double quotes).
 
 ### Why Use Named Parameters?
 
