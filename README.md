@@ -2,6 +2,8 @@
 
 Monkey patch to add sugar and spice to [node-postgres](https://github.com/brianc/node-postgres) (the [node.js](http://nodejs.org/) [PostgreSQL](http://www.postgresql.org/) client).
 
+__NOTE:__ See the module [pg-db](https://github.com/sehrope/node-pg-db) for a more extensive library that supports named parameters, transactions, and more without requiring monkey patching.
+
 # Installation
 
 Add it to your node.js project via:
