@@ -25,14 +25,14 @@
     "lodash": "~2.4.1"
   },
   "peerDependencies": {
-    "pg.js": "~3",
+    "pg": "~4",
     "debug": "~0"
   },
   "optionalDependencies": {},
   "devDependencies": {
     "jshint": "latest",
     "mocha": "latest",
-    "pg.js": "~3",
+    "pg": "~4",
     "debug": "~0"
   },
   "engines": {
