@@ -212,7 +212,7 @@
     for(i=0;i<params.length;i++) {
       param = params[i];
       paramTypes[param.type] = (paramTypes[param.type] || 0) + 1;
-      if( /[0-9]+/.test(param.name) ) {
+      if( /^[0-9]+$/.test(param.name) ) {
         throw new Error("You cannot mix named and numbered parameters." +
             " Check parameter '" + param.name + "' at position " + param.start +
             " in statement: " + stmt);
