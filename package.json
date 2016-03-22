@@ -22,18 +22,18 @@
   "author": "Sehrope Sarkuni <sehrope@jackdb.com>",
   "license": "MIT",
   "dependencies": {
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1 || ~4.6.1"
   },
   "peerDependencies": {
     "pg": "~4",
-    "debug": "~0"
+    "debug": "~0 || ~2.2.0"
   },
   "optionalDependencies": {},
   "devDependencies": {
     "jshint": "latest",
     "mocha": "latest",
     "pg": "~4",
-    "debug": "~0"
+    "debug": "~0 || ~2.2.0"
   },
   "engines": {
     "node": ">= 0.8.0"
