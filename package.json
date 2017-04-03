@@ -32,7 +32,7 @@
   "devDependencies": {
     "jshint": "latest",
     "mocha": "latest",
-    "pg": "~4"
+    "pg": "~6"
   },
   "engines": {
     "node": ">= 0.8.0"
