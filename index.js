@@ -259,11 +259,16 @@
    * indexes come from the parsedSql object and a given parameter may
    * appear in multiple positions.
    */
-  function convertParamValues(parsedSql, values) {
+  function convertParamValues(parsedSql, values, addUndefinedNamedParameters) {
     var ret = [];
     _.each(parsedSql.params, function(param) {
       if( !_.has(values, param.name) ) {
-        throw new Error("No value found for parameter: " + param.name);
+        if(addUndefinedNamedParameters){
+           values[param.name] = null;
+        }
+        else{
+          throw new Error("No value found for parameter: " + param.name);
+        }
       }
       ret.push(values[param.name]);
     });
@@ -288,7 +293,7 @@
 
     // Add named parameter support to Client.query:
     var origQuery = pg.Client.prototype.query;
-    pg.Client.prototype.query = function(config, values, callback) {
+    pg.Client.prototype.query = function(config, values, callback, addUndefinedNamedParameters) {
       var sql;
       if( _.isString(config) ) {
         sql = config;
@@ -304,8 +309,8 @@
             throw new Error("First parameter of query() must be a string or config object with a name property");
           }
           var parsedSql = parseSql(sql);
-          debug.main("parsed sql:", parsedSql);
-          var params = convertParamValues(parsedSql, values);
+          debug.main("parsed sql:", parsedSql);          
+          var params = convertParamValues(parsedSql, values, addUndefinedNamedParameters);
           debug.main("parsed params:", params);
           return origQuery.apply(this, [parsedSql.sql, params, callback]);
         } catch( err ) {

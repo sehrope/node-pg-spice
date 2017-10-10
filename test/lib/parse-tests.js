@@ -6,6 +6,7 @@ module.exports = function(spice) {
     var sql = opts.sql,
         expectedSql = opts.expectedSql || sql,
         values = opts.values || {},
+        addUndefinedNamedParameters = opts.addUndefinedNamedParameters,
         expectedNumParams = opts.expectedNumParams || _.size(_.keys(opts.values));
     it('should match the expected parsed SQL', function() {
       var parsed = spice.parseSql(sql);
@@ -14,7 +15,7 @@ module.exports = function(spice) {
 
     it('should match the expected number of parameters', function() {
       var parsed = spice.parseSql(sql),
-          params = spice.convertParamValues(parsed, values);
+          params = spice.convertParamValues(parsed, values, addUndefinedNamedParameters);       
       assert.equal(params.length, expectedNumParams);
     });
   }
@@ -22,11 +23,12 @@ module.exports = function(spice) {
   function testInvalid(opts) {
     var text = opts.name || 'should throw an error',
         sql = opts.sql,
+        addUndefinedNamedParameters = opts.addUndefinedNamedParameters,
         values = opts.values || {};
     it(text, function() {
       assert.throws(function() {
         var parsed = spice.parseSql(sql),
-            params = spice.convertParamValues(parsed, values);
+            params = spice.convertParamValues(parsed, values, addUndefinedNamedParameters);
       });
     });
   }
@@ -81,6 +83,16 @@ module.exports = function(spice) {
     testInvalid({
       sql: 'SELECT :foo',
       values: {}
+    });
+  });
+
+  describe('Parse SQL missing parameter value as null', function() {
+    testValid({
+      sql: 'SELECT :foo',
+      values: {},
+      expectedSql:'SELECT $1',
+      addUndefinedNamedParameters: true,
+      expectedNumParams : 1 
     });
   });
 
