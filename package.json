@@ -1,6 +1,6 @@
 {
   "name": "pg-spice",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Monkey patch providing sugar and spice atop the node.js PostgreSQL client library",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sehrope/node-pg-spice"
+    "url": "git://github.com/geoblink/node-pg-spice"
   },
   "keywords": [
     "postgresql",
